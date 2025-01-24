@@ -3,4 +3,4 @@ tensorflow
 numpy
 librosa
 flask
-sklearn
+scikit-learn
