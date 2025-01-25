@@ -21,7 +21,7 @@ def predict():
     emotion = emotion_detection.detect_emotion(audio_path)
 
     # Opcional: borrar el archivo después del procesamiento
-    # os.remove(audio_path)
+    os.remove(audio_path)
 
     # Enviar la emoción detectada como respuesta
     return jsonify({'emotion': emotion})
