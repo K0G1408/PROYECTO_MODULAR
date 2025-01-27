@@ -6,7 +6,7 @@ from sklearn.preprocessing import LabelEncoder
 from tensorflow.keras.models import load_model
 
 # Cargamos el modelo ya entrenado
-model = load_model(r"C:\Users\Kevin\Desktop\PROYECTO MODULAR\MODEL\bestModelBidirectional97-71.keras")
+model = load_model(r"bestModelBidirectional97-71.keras")
 max_duration = 2.53718820861678
 
 # Función para extraer MFCC de un archivo de audio
