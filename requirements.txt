@@ -3,5 +3,4 @@ tensorflow
 numpy
 librosa
 scikit-learn
-os
 io
