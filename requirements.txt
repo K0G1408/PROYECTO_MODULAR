@@ -3,4 +3,3 @@ tensorflow
 numpy
 librosa
 scikit-learn
-io
