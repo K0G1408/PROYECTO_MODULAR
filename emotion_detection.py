@@ -6,7 +6,7 @@ from sklearn.preprocessing import LabelEncoder
 from tensorflow.keras.models import load_model
 
 # Cargamos el modelo ya entrenado
-model = load_model(r"bestModelBidirectional97-71.keras")
+model = load_model(r"C:\Users\Kevin\Desktop\PROYECTO MODULAR\MODEL\bestModelBidirectional97-71.keras")
 max_duration = 2.53718820861678
 
 # Función para extraer MFCC de un archivo de audio
@@ -55,7 +55,7 @@ def make_prediction(audio_file):
     # Llevamos el audio recibido al formato esperado por nuestra red neuronal
     from io import BytesIO
     # Cargar el archivo de audio directamente desde el flujo de bytes
-    audio_data, sr = librosa.load(BytesIO(audio_file.read()), sr=None)
+    audio_data, sr = librosa.load(BytesIO(audio_file.read()))
 
     # Añadir padding o truncarlo al máximo permitido (por ejemplo, max_duration en segundos)
     new_padded_audio = pad_audio(audio_data, sr, max_duration)
@@ -71,8 +71,7 @@ def make_prediction(audio_file):
     predicted_class = model.predict(mfcc_new_audio)
     predicted_emotion = label_encoder.inverse_transform([np.argmax(predicted_class)])
 
-    return predicted_emotion[0]
-
+    return predicted_emotion
 
 
 
