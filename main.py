@@ -1,5 +1,7 @@
 from flask import Flask, request, jsonify
 import emotion_detection  # Tu archivo con el modelo de IA
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 app = Flask(__name__)
 
