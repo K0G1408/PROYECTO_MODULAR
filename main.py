@@ -20,7 +20,7 @@ def predict():
     audio_file.save(audio_path)
 
     # Usar tu modelo de IA para predecir emociones
-    emotion = emotion_detection.detect_emotion(audio_path)
+    emotion = emotion_detection.make_prediction(audio_path)
 
     # Opcional: borrar el archivo después del procesamiento
     os.remove(audio_path)
