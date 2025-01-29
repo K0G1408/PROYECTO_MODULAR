@@ -7,11 +7,11 @@ app = Flask(__name__)
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    if 'audio_file' not in request.files:
+    if 'audio' not in request.files:
         return jsonify({"error": "No audio file provided"}), 400
     
     # Obtén el archivo correctamente
-    audio_file = request.files['audio_file']  # Esto debería ser un archivo binario
+    audio_file = request.files['audio']  # Esto debería ser un archivo binario
     print(request.files)
     try:
         # Cargar audio desde el archivo recibido
