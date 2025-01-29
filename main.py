@@ -12,7 +12,7 @@ def predict():
     
     # Obtén el archivo correctamente
     audio_file = request.files['audio_file']  # Esto debería ser un archivo binario
-    
+    print(request.files)
     try:
         # Cargar audio desde el archivo recibido
         audio_data, sr = librosa.load(BytesIO(audio_file.read()))
