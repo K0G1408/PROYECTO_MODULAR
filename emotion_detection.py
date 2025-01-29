@@ -29,7 +29,7 @@ def pad_audio(audio, sr, max_duration):
     return padded_audio
 
 # Predicción para un nuevo audio
-def make_prediction(audio_data, sr):
+def make_prediction(audio_file):
     global max_duration
     
     # Buscamos la duracion máxima de los audios del dataset
@@ -55,7 +55,7 @@ def make_prediction(audio_data, sr):
     # Llevamos el audio recibido al formato esperado por nuestra red neuronal
     from io import BytesIO
     # Cargar el archivo de audio directamente desde el flujo de bytes
-    #audio_data, sr = librosa.load(BytesIO(audio_file.read()))
+    audio_data, sr = librosa.load(BytesIO(audio_file.read()))
 
     # Añadir padding o truncarlo al máximo permitido (por ejemplo, max_duration en segundos)
     new_padded_audio = pad_audio(audio_data, sr, max_duration)
