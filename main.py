@@ -19,11 +19,11 @@ def predict():
     print(f"Archivo recibido: {audio_file.filename}")
     try:
         # Cargar audio desde el archivo recibido
-        audio_data, sr = librosa.load(BytesIO(audio_file.read()))
-        print(f"Audio cargado: {audio_file.filename}")
+        #audio_data, sr = librosa.load(BytesIO(audio_file.read()))
+        #print(f"Audio cargado: {audio_file.filename}")
         
         # Llamar a la función que hace la predicción
-        emotion = emotion_detection.make_prediction(audio_data, sr)
+        emotion = emotion_detection.make_prediction(audio_file)
         
         return jsonify({"emotion": emotion})
     except Exception as e:
