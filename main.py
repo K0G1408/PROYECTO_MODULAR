@@ -14,9 +14,11 @@ def predict():
     # Obtén el archivo correctamente
     audio_file = request.files['audio']  # Esto debería ser un archivo binario
     print(request.files)
+    print(f"Archivo recibido: {audio_file.filename}")
     try:
         # Cargar audio desde el archivo recibido
         audio_data, sr = librosa.load(BytesIO(audio_file.read()))
+        print(f"Audio cargado: {audio_file.filename}")
         
         # Llamar a la función que hace la predicción
         emotion = emotion_detection.make_prediction(audio_data, sr)
