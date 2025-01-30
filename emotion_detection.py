@@ -71,7 +71,7 @@ def make_prediction(audio_file):
     predicted_class = model.predict(mfcc_new_audio)
     predicted_emotion = label_encoder.inverse_transform([np.argmax(predicted_class)])
 
-    return predicted_emotion
+    return predicted_emotion[0]
 
 
 
