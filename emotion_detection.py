@@ -8,7 +8,7 @@ from tensorflow.keras.models import load_model
 # Cargamos el modelo ya entrenado
 #model = load_model(r"bestModelBidirectional97-71.keras")
 model = load_model(r"PMv32001001001286432_8572.keras")
-#model.summary()
+model.summary()
 max_duration = 2.53718820861678
 
 # Función para extraer MFCC de un archivo de audio
