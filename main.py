@@ -1,29 +1,40 @@
-from flask import Flask, request, jsonify
-import os
-import librosa
-from io import BytesIO
-import numpy as np
-os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-import emotion_detection
-app = Flask(__name__)
+from PySide2.QtWidgets import QApplication, QMainWindow
+import mainwindow, sys
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    if 'audio' not in request.files:
-        return jsonify({"error": "No audio file provided"}), 400
-    
-    audio_file = request.files['audio']
-    try:
-        # Llamar a la función que hace la predicción
-        emotion = emotion_detection.make_prediction(audio_file)
+app = QApplication()
+window = mainwindow.MainWindow()
+window.show()
+
+sys.exit(app.exec_())
+
+# Tareas pendientes:
+    # 1) Conectar elementos de la interfaz:
+        # 1.1) Elegir hablante y pasarlo dinámicamente de mainwindow.py a diarization.py
+        # 1.2) Conectar archivos diarization.py con el archivo emotion_detection.py,
+        #      de modo que se puedan detectar las emociones del audio seleccionado
+        #      y obtener el resultado de manera dinámica (sadness, neutral, anger, etc.)
         
-        return jsonify({"emotion": emotion})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        # COMPLETADO
+        
+    # 2) Crear una base de datos simple para el sistema (base de datos para visualizar
+    #    los resultados de análisis previos, sin necesidad de volver a procesar todo de nuevo)
+    
+    # Posible solucion: usar SQLite.
+        # CARGAR RESULTADOS
+        # De este modo, al presionar "cargar resultados", simplemente podemos mostrar un
+        # listado de resultados almacenados en nuestra base de datos y dejar que el
+        # usuario seleccione entre uno de ellos.
+        # Finalmente, la carga de la información sería sencilla, pues es solo insertar textos
+        # en pantalla.
+        
+        # GUARDAR RESULTADOS
+        # Por otro lado, para guardar resultados es igualmente sencillo, simplemente debemos
+        # almacenar algunos textos (nombre de proyecto, de audio, resultado, etc.) y permitir
+        # al usuario elegir un nombre para identificar estos resultados en la base de datos,
+        # de modo que, posteriormente, pueda cargarlos en CARGAR RESULTADOS.
 
 
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+
+
+
 
