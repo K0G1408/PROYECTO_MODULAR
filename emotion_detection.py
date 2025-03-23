@@ -6,16 +6,24 @@ from sklearn.preprocessing import LabelEncoder
 from tensorflow.keras.models import load_model
 
 # Cargamos el modelo ya entrenado
-#model = load_model(r"bestModelBidirectional97-71.keras")
-model = load_model(r"PMv32001001001286432_8572.keras")
-model.summary()
-max_duration = 2.53718820861678
+from tensorflow.keras.models import model_from_json
+
+# Cargar la arquitectura
+with open("model.json", "r") as json_file:
+    loaded_model_json = json_file.read()
+model = model_from_json(loaded_model_json)
+
+# Cargar pesos comprimidos
+weights = np.load("model_weights.npz")
+model.set_weights([weights[f"arr_{i}"] for i in range(len(weights.files))])
+print("Modelo cargado correctamente con pesos comprimidos.")
+max_duration = 24.973514739229024
 
 # Función para extraer MFCC de un archivo de audio
 # Los coeficientes MFCC extraen caracteristicas de las ondas que componen audio que permiten, entre otras cosas,
 # reconocer voz o, para este caso, emociones.
 def extract_mfcc(audio, sr):
-    mfcc = librosa.feature.mfcc(y=audio, sr=sr, n_mfcc=13)  # Extraer 13 coeficientes, MFCC
+    mfcc = librosa.feature.mfcc(y=audio, sr=sr, n_mfcc=20)  # Extraer 13 coeficientes, MFCC
     return mfcc
 
 def pad_audio(audio, sr, max_duration):
@@ -37,12 +45,7 @@ def make_prediction(audio_file):
     # Buscamos la duracion máxima de los audios del dataset
     audio_duration = []
     
-    emotions = ["Enojo", 
-                "Desagrado", 
-                "Miedo", 
-                "Felicidad", 
-                "Neutral", 
-                "Tristeza"]
+    emotions = ["Tristeza", "Alegría", "Neutral", "Disgusto", "Enojo"]
             
     # Convertimos listas a arreglos de numpy  
     y = np.array(emotions)
@@ -73,7 +76,7 @@ def make_prediction(audio_file):
     predicted_class = model.predict(mfcc_new_audio)
     predicted_emotion = label_encoder.inverse_transform([np.argmax(predicted_class)])
 
-    return predicted_emotion[0]
+    return predicted_emotion
 
 
 
