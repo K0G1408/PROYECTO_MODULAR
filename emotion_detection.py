@@ -3,6 +3,12 @@ import librosa
 import os
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
+import tensorflow as tf
+print("Usando TensorFlow en CPU:", tf.config.list_physical_devices('CPU'))
+
 from tensorflow.keras.models import load_model
 
 # Cargamos el modelo ya entrenado
