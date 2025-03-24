@@ -7,7 +7,18 @@ import os
 from tensorflow.keras.models import load_model
 from tensorflow.keras.models import model_from_json
 
-model = load_model("new_cnnbi.keras")
+import gdown
+
+# URL del archivo en Google Drive
+file_url = "https://drive.google.com/uc?id=1d2TyzupgX5ftfOv5K5BnB-Mlc1Yus4eT"
+output = "model.keras"
+gdown.download(file_url, output, quiet=False)
+print(f"Archivo descargado: {output}")
+
+
+from tensorflow.keras.models import load_model
+
+model = load_model("model.keras")
 max_duration = 24.973514739229024
 
 # Función para extraer MFCC de un archivo de audio
