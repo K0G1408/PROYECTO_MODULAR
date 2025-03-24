@@ -93,10 +93,11 @@ def make_prediction(audio_file):
 
     # Realizar la predicción usando el modelo
     try:
-        print("Realizando la predicción...")
+        print("Realizando la predicción... hola3")
         predicted_class = model.predict(mfcc_new_audio)
         predicted_emotion = label_encoder.inverse_transform([np.argmax(predicted_class)])
-        print(f"Resultado de la predicción1: {predicted_emotion}")
+        print("HOLA5")
+        print(f"Resultado de la predicción1: {predicted_class}")
         print(f"Resultado de la predicción2: {predicted_emotion[0]}")
         
         return predicted_emotion
