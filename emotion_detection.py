@@ -4,10 +4,13 @@ import os
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"  # Deshabilita GPU
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"  # Oculta warnings de TensorFlow
+os.environ["XLA_FLAGS"] = "--xla_gpu_cuda_data_dir=/dev/null"  # Evita intentos de uso de CUDA
 
 import tensorflow as tf
 print("Usando TensorFlow en CPU:", tf.config.list_physical_devices('CPU'))
+
 
 from tensorflow.keras.models import load_model
 
