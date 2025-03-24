@@ -86,7 +86,7 @@ def make_prediction(audio_file):
         print("HOLA5")
         print(f"Resultado: {predicted_emotion}")
         
-        return predicted_emotion
+        return predicted_emotion[0]
     except Exception as e:
         print(f"Error al hacer la predicción: {e}")
 
