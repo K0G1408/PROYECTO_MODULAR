@@ -7,16 +7,7 @@ import os
 from tensorflow.keras.models import load_model
 from tensorflow.keras.models import model_from_json
 
-# Cargar la arquitectura
-with open("model.json", "r") as json_file:
-    loaded_model_json = json_file.read()
-model = model_from_json(loaded_model_json)
-print(model.summary())
-
-# Cargar pesos comprimidos
-weights = np.load("model_weights.npz")
-model.set_weights([weights[f"arr_{i}"] for i in range(len(weights.files))])
-print("Modelo cargado correctamente con pesos comprimidos.")
+model = load_model("new_cnnbi.keras")
 max_duration = 24.973514739229024
 
 # Función para extraer MFCC de un archivo de audio
