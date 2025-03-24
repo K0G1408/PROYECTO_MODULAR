@@ -46,6 +46,7 @@ def make_prediction(audio_file):
     audio_duration = []
     
     emotions = ["Tristeza", "Alegría", "Neutral", "Disgusto", "Enojo"]
+    print(emotions)
             
     # Convertimos listas a arreglos de numpy  
     y = np.array(emotions)
@@ -75,7 +76,8 @@ def make_prediction(audio_file):
     # Realizar la predicción usando el modelo
     predicted_class = model.predict(mfcc_new_audio)
     predicted_emotion = label_encoder.inverse_transform([np.argmax(predicted_class)])
-
+    
+    print(predicted_emotion)
     return predicted_emotion
 
 
