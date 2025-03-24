@@ -12,6 +12,7 @@ from tensorflow.keras.models import model_from_json
 with open("model.json", "r") as json_file:
     loaded_model_json = json_file.read()
 model = model_from_json(loaded_model_json)
+print(model.summary())
 
 # Cargar pesos comprimidos
 weights = np.load("model_weights.npz")
@@ -81,8 +82,8 @@ def make_prediction(audio_file):
         print("Realizando la predicción...")
         predicted_class = model.predict(mfcc_new_audio)
         predicted_emotion = label_encoder.inverse_transform([np.argmax(predicted_class)])
-        print("Realizando la predicción...")
-        print(f"Resultado de la predicción: {predicted_emotion}")
+        print(f"Resultado de la predicción1: {predicted_emotion}")
+        print(f"Resultado de la predicción2: {predicted_emotion[0]}")
         
         return predicted_emotion
     except Exception as e:
