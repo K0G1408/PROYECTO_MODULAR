@@ -4,8 +4,12 @@ import os
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "-1"  # Deshabilita GPU
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"  # Oculta warnings de TensorFlow
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
+tf.config.set_visible_devices([], 'GPU')
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # 0 = all messages, 1 = no info, 2 = no warnings, 3 = no errors
+
 os.environ["XLA_FLAGS"] = "--xla_gpu_cuda_data_dir=/dev/null"  # Evita intentos de uso de CUDA
 
 import tensorflow as tf
