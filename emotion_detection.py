@@ -74,11 +74,17 @@ def make_prediction(audio_file):
     mfcc_new_audio = np.expand_dims(mfcc_new_audio, axis=0)  # (1, n_samples, n_features)
 
     # Realizar la predicción usando el modelo
-    predicted_class = model.predict(mfcc_new_audio)
-    predicted_emotion = label_encoder.inverse_transform([np.argmax(predicted_class)])
+    try:
+        print("Realizando la predicción...")
+        predicted_class = model.predict(mfcc_new_audio)
+        predicted_emotion = label_encoder.inverse_transform([np.argmax(predicted_class)])
+        print(f"Resultado de la predicción: {predicted_class}")
+        
+        return predicted_emotion
+    except Exception as e:
+        print(f"Error al hacer la predicción: {e}")
+
     
-    print(predicted_emotion)
-    return predicted_emotion
 
 
 
