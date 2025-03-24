@@ -4,10 +4,6 @@ import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 os.environ["XLA_FLAGS"] = "--xla_gpu_cuda_data_dir=/dev/null"
-
-import tensorflow as tf
-print("Usando TensorFlow en CPU:", tf.config.list_physical_devices('CPU'))
-
 from flask import Flask, request, jsonify
 import emotion_detection  # Tu archivo con el modelo de IA
 app = Flask(__name__)
@@ -18,12 +14,10 @@ def predict():
       return jsonify({"error": "No se recibió ningún audio"}), 400
 
   audio_file = request.files['audio']
-  print(request.files)
-  print(f"Archivo recibido: {audio_file.filename}")
-  audio_file = request.files['audio']
  
   try:
       # Llamar a la función que hace la predicción
+      print("HOLA")
       emotion = emotion_detection.make_prediction(audio_file)
       print("HOLA")
       print(emotion)
