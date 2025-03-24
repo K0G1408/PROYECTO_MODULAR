@@ -22,6 +22,7 @@ def predict():
       print("HOLA")
       emotion = emotion_detection.make_prediction(audio_file)
 
+      print(f"HOLA DE VUELTA {emotion}")
       return jsonify({"emotion": emotion})
      
   except Exception as e:
