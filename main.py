@@ -2,8 +2,7 @@ import numpy as np
 import os
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
-os.environ["XLA_FLAGS"] = "--xla_gpu_cuda_data_dir=/dev/null"
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 from flask import Flask, request, jsonify
 import emotion_detection  # Tu archivo con el modelo de IA
 app = Flask(__name__)
