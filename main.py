@@ -3,7 +3,7 @@ import os
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-
+import tensorflow as tf
 tf.config.set_visible_devices([], 'GPU')
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # 0 = all messages, 1 = no info, 2 = no warnings, 3 = no errors
 
