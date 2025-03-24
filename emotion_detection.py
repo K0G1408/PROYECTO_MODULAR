@@ -4,22 +4,7 @@ import os
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-
-import tensorflow as tf
-tf.config.set_visible_devices([], 'GPU')
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # 0 = all messages, 1 = no info, 2 = no warnings, 3 = no errors
-
-os.environ["XLA_FLAGS"] = "--xla_gpu_cuda_data_dir=/dev/null"  # Evita intentos de uso de CUDA
-
-import tensorflow as tf
-print("Usando TensorFlow en CPU:", tf.config.list_physical_devices('CPU'))
-
-
 from tensorflow.keras.models import load_model
-
-# Cargamos el modelo ya entrenado
 from tensorflow.keras.models import model_from_json
 
 # Cargar la arquitectura
@@ -98,7 +83,6 @@ def make_prediction(audio_file):
         predicted_emotion = label_encoder.inverse_transform([np.argmax(predicted_class)])
         print("HOLA5")
         print(f"Resultado de la predicción1: {predicted_class}")
-        print(f"Resultado de la predicción2: {predicted_emotion[0]}")
         
         return predicted_emotion
     except Exception as e:
