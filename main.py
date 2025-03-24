@@ -17,7 +17,7 @@ def predict():
   try:
       # Llamar a la función que hace la predicción
       emotion = emotion_detection.make_prediction(audio_file)
-      print(f"emocion2 {emocion}")
+      print(f"emocion2 {emotion}")
 
       return jsonify({"emotion": emotion})
      
