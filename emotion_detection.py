@@ -84,7 +84,7 @@ def make_prediction(audio_file):
         predicted_class = model.predict(mfcc_new_audio)
         predicted_emotion = label_encoder.inverse_transform([np.argmax(predicted_class)])
         print("HOLA5")
-        print(f"Resultado de la predicción1: {predicted_class}")
+        print(f"Resultado de la predicción1: {predicted_emotion}")
         
         return predicted_emotion
     except Exception as e:
