@@ -1,25 +1,26 @@
-# Importamos librosa para el procesamiento de audios
 import librosa
-import os
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
-import os
 from tensorflow.keras.models import load_model
-from tensorflow.keras.models import model_from_json
-
+from io import BytesIO
 import gdown
 
-# URL del archivo en Google Drive
-file_url = "https://drive.google.com/uc?id=1d2TyzupgX5ftfOv5K5BnB-Mlc1Yus4eT"
-output = "model.keras"
-gdown.download(file_url, output, quiet=False)
-print(f"Archivo descargado: {output}")
-
-
-from tensorflow.keras.models import load_model
-
-model = load_model("model.keras")
+# Variable global para almacenar el modelo cargado
+_model = None
 max_duration = 24.973514739229024
+
+def load_model_once():
+    global _model
+    if _model is None:
+        # Descargar el modelo desde Google Drive si no está cargado
+        file_url = "https://drive.google.com/uc?id=1d2TyzupgX5ftfOv5K5BnB-Mlc1Yus4eT"
+        output = "model.keras"
+        gdown.download(file_url, output, quiet=False)
+        print(f"Archivo descargado: {output}")
+
+        # Cargar el modelo
+        _model = load_model(output)
+    return _model
 
 # Función para extraer MFCC de un archivo de audio
 # Los coeficientes MFCC extraen caracteristicas de las ondas que componen audio que permiten, entre otras cosas,
@@ -44,6 +45,9 @@ def pad_audio(audio, sr, max_duration):
 def make_prediction(audio_file):
     
     global max_duration
+
+    # Cargar el modelo una sola vez
+    model = load_model_once()
     
     print(audio_file)
     # Buscamos la duracion máxima de los audios del dataset
