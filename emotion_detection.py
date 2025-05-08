@@ -86,7 +86,7 @@ def make_prediction(audio_file):
         print("predicted_class", predicted_class)
         print("predicted_emotion", predicted_emotion)
         
-        return [predicted_emotion[0], predicted_class]
+        return predicted_emotion[0], predicted_class
     except Exception as e:
         print(f"Error al hacer la predicción: {e}")
 
