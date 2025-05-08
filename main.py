@@ -19,9 +19,16 @@ def predict():
  
   try:
       # Llamar a la función que hace la predicción
-      emotion = emotion_detection.make_prediction(audio_file)
+      emotion, probs = make_prediction(audio_file)
 
-      return jsonify({"emotion": emotion})
+      if emotion is None:
+          return jsonify({"error": "No se pudo predecir la emoción"}), 500
+      
+      return jsonify({
+          "emotion": emotion,
+          "probabilities": probs.tolist()  # convierte numpy array a lista JSON serializable
+      })
+
      
   except Exception as e:
       return jsonify({"error": str(e)}), 500
