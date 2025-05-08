@@ -19,7 +19,7 @@ def predict():
  
   try:
       # Llamar a la función que hace la predicción
-      emotion, probs = make_prediction(audio_file)
+      emotion, probs = emotion_detection.make_prediction(audio_file)
 
       if emotion is None:
           return jsonify({"error": "No se pudo predecir la emoción"}), 500
