@@ -52,7 +52,7 @@ def make_prediction(audio_file):
     # Buscamos la duracion máxima de los audios del dataset
     audio_duration = []
     
-    emotions = ["Tristeza", "Alegría", "Neutral", "Disgusto", "Enojo"]
+    emotions = sorted(["Tristeza", "Alegría", "Neutral", "Disgusto", "Enojo"])
             
     # Convertimos listas a arreglos de numpy  
     y = np.array(emotions)
@@ -83,10 +83,8 @@ def make_prediction(audio_file):
     try:
         predicted_class = model.predict(mfcc_new_audio)
         predicted_emotion = label_encoder.inverse_transform([np.argmax(predicted_class)])
-        print("predicted_class", predicted_class)
-        print("predicted_class", predicted_emotion)
         
-        return predicted_emotion[0]
+        return [predicted_emotion[0], predicted_class]
     except Exception as e:
         print(f"Error al hacer la predicción: {e}")
 
