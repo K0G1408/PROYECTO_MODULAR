@@ -52,7 +52,7 @@ def make_prediction(audio_file):
     # Buscamos la duracion máxima de los audios del dataset
     audio_duration = []
     
-    emotions = sorted(["Tristeza", "Alegría", "Neutral", "Disgusto", "Enojo"])
+    emotions = ["Tristeza", "Alegría", "Neutral", "Disgusto", "Enojo"]
             
     # Convertimos listas a arreglos de numpy  
     y = np.array(emotions)
