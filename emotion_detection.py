@@ -49,12 +49,10 @@ def make_prediction(audio_file):
     # Cargar el modelo una sola vez
     model = load_model_once()
     
-    print(audio_file)
     # Buscamos la duracion máxima de los audios del dataset
     audio_duration = []
     
     emotions = ["Tristeza", "Alegría", "Neutral", "Disgusto", "Enojo"]
-    print(emotions)
             
     # Convertimos listas a arreglos de numpy  
     y = np.array(emotions)
@@ -70,7 +68,6 @@ def make_prediction(audio_file):
     from io import BytesIO
     # Cargar el archivo de audio directamente desde el flujo de bytes
     audio_data, sr = librosa.load(BytesIO(audio_file.read()))
-    print(audio_data.shape)
 
     # Añadir padding o truncarlo al máximo permitido (por ejemplo, max_duration en segundos)
     new_padded_audio = pad_audio(audio_data, sr, max_duration)
@@ -84,11 +81,10 @@ def make_prediction(audio_file):
 
     # Realizar la predicción usando el modelo
     try:
-        print("Realizando la predicción... hola3")
         predicted_class = model.predict(mfcc_new_audio)
         predicted_emotion = label_encoder.inverse_transform([np.argmax(predicted_class)])
-        print("HOLA5")
-        print(f"Resultado: {predicted_emotion}")
+        print("predicted_class", predicted_class)
+        print("predicted_class", predicted_emotion)
         
         return predicted_emotion[0]
     except Exception as e:
